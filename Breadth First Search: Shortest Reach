@@ -26,7 +26,6 @@ struct Queue
 {
     struct QNode *front, *rear;
 };
- 
 // A utility function to create a new linked list node.
 struct QNode* newNode(int k)
 {
