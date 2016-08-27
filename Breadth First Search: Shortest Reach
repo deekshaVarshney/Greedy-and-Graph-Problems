@@ -151,7 +151,11 @@ void addEdge(struct Graph* graph, int src, int dest)
      
      int distance[graph->V];
         for(i=0;i<graph->V;i++)
-         distance[i]=-1;    
+         distance[i]=-1; 
+     
+     int parent[graph->V];
+        for(i=0;i<graph->V;i++)
+         parent[i]=-1; 
      
     struct Queue *q = createQueue();
      enQueue(q,s);
@@ -179,17 +183,21 @@ void addEdge(struct Graph* graph, int src, int dest)
                 // printf("V(%d) N(%d)",visited[pCrawl->dest],pCrawl->dest);
                distance[pCrawl->dest]=distance[n->key]+6;
               // printf("D(%d) N(%d) ",distance[pCrawl->dest],pCrawl->dest);
+               parent[pCrawl->dest]=n->key;
+               printf("P%d  N%d",parent[pCrawl->dest],pCrawl->dest);
                 enQueue(q,pCrawl->dest);
             }
          	pCrawl = pCrawl->next;
-         }
+         
+     }
      	printf("\n");
-	 }
-	}
-     	for( i=0;i<graph->V;++i)
+	               
+      }
+           
+       }
+     	for( i=0;i<graph->V;i++)
 	printf("%d ",distance[i]);
  }
- 
 int main()
 {
     int V=4;
