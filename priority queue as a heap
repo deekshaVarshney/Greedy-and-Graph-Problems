@@ -1,0 +1,253 @@
+#include<stdio.h>
+#include<limits.h>
+#include<math.h>
+/*Declaring heap globally so that we do not need to pass it as an argument every time*/
+int heap[1000000],heapSize,level[1000000];
+/*Initialize Heap*/
+void Init()
+{
+        heapSize = 0;
+        heap[0] = -INT_MAX;
+    level[0]=0;
+
+}
+void max_heapify(int data[] , int loc, int count) {
+	int left, right, largest, temp;
+	left = 2*(loc) + 1;
+	right = left + 1;
+	largest = loc;
+	
+
+	if (left <= count && data[left] > data[largest]) {
+		largest = left;
+	} 
+	if (right <= count && data[right] > data[largest]) {
+		largest = right;
+	} 
+	
+	if(largest != loc) {
+		temp = data[loc];
+		data[loc] = data[largest];
+		data[largest] = temp;
+		max_heapify(data, largest, count);
+	// max_heapify(heap,1,heapSize);
+    }
+
+}
+/*Insert an element into the heap */
+int Insert(int value)
+{
+    int index,parent,p;
+    level[-1]=0;
+    index=heapSize++;
+    p=(index-1)/2;
+    //	printf("P%d V%d",p,value);	
+     level[p]=level[p-1]+1;
+  //   printf("L%d",level[p]);
+  for(;index; index = parent)
+	{
+		parent = (index - 1) / 2;
+     
+
+      if (heap[parent] >= value) 
+            break;
+		heap[index] = heap[parent];
+
+  }
+	heap[index] = value;
+    return level[p];
+}
+
+void heap_display(int level) {
+	int i,l=0,j,k;
+//printf("LL%d",level);
+    
+    for(i=0;i<=level;i++)
+    {
+        
+        for(j=5;j>i;j--)
+        {
+          printf(" ");
+        }
+        for(j=1;j<=pow(2,i);j++)
+        {
+            
+            if(heap[l]==0)
+            break;
+          printf("%d ",heap[l]);
+            l++;
+        }
+        printf("\n");
+    }
+}
+int heap_delete(int m)
+{
+	int removed,in,i;
+    //printf("%d",m);
+    for(i=0;i<heapSize;i++)
+        {
+        if(heap[i]==m)
+            in=i;
+    }
+   // printf("Index%d",in);
+	int temp = heap[--heapSize];
+    removed = heap[in];
+	heap[in] = temp;
+	max_heapify(heap, 0, heapSize);
+	return removed;
+}
+
+int main()
+{
+        int number_of_elements,s,n,m,r;
+        scanf("%d",&number_of_elements);
+        int iter, element;
+        Init();
+        
+    for(iter = 0;iter < number_of_elements;iter++)
+        {
+                scanf("%d",&element);
+            s= Insert(element);
+            
+            heap_display(s);
+            printf("\n");
+            
+        }
+   // printf("enter the element to be deleted");
+    scanf("%d",&m);
+  r=heap_delete(m);
+    
+    printf("removed elemnt %d",r);
+   printf("\n");
+    heap_display(s);
+    
+    
+        printf("\n");
+        return 0;
+}#include<stdio.h>
+#include<limits.h>
+#include<math.h>
+/*Declaring heap globally so that we do not need to pass it as an argument every time*/
+int heap[1000000],heapSize,level[1000000];
+/*Initialize Heap*/
+void Init()
+{
+        heapSize = 0;
+        heap[0] = -INT_MAX;
+    level[0]=0;
+
+}
+void max_heapify(int data[] , int loc, int count) {
+	int left, right, largest, temp;
+	left = 2*(loc) + 1;
+	right = left + 1;
+	largest = loc;
+	
+
+	if (left <= count && data[left] > data[largest]) {
+		largest = left;
+	} 
+	if (right <= count && data[right] > data[largest]) {
+		largest = right;
+	} 
+	
+	if(largest != loc) {
+		temp = data[loc];
+		data[loc] = data[largest];
+		data[largest] = temp;
+		max_heapify(data, largest, count);
+	// max_heapify(heap,1,heapSize);
+    }
+
+}
+/*Insert an element into the heap */
+int Insert(int value)
+{
+    int index,parent,p;
+    level[-1]=0;
+    index=heapSize++;
+    p=(index-1)/2;
+    //	printf("P%d V%d",p,value);	
+     level[p]=level[p-1]+1;
+  //   printf("L%d",level[p]);
+  for(;index; index = parent)
+	{
+		parent = (index - 1) / 2;
+     
+
+      if (heap[parent] >= value) 
+            break;
+		heap[index] = heap[parent];
+
+  }
+	heap[index] = value;
+    return level[p];
+}
+
+void heap_display(int level) {
+	int i,l=0,j,k;
+//printf("LL%d",level);
+    
+    for(i=0;i<=level;i++)
+    {
+        
+        for(j=5;j>i;j--)
+        {
+          printf(" ");
+        }
+        for(j=1;j<=pow(2,i);j++)
+        {
+            
+            if(heap[l]==0)
+            break;
+          printf("%d ",heap[l]);
+            l++;
+        }
+        printf("\n");
+    }
+}
+int heap_delete(int m)
+{
+	int removed,in,i;
+    //printf("%d",m);
+    for(i=0;i<heapSize;i++)
+        {
+        if(heap[i]==m)
+            in=i;
+    }
+   // printf("Index%d",in);
+	int temp = heap[--heapSize];
+    removed = heap[in];
+	heap[in] = temp;
+	max_heapify(heap, 0, heapSize);
+	return removed;
+}
+
+int main()
+{
+        int number_of_elements,s,n,m,r;
+        scanf("%d",&number_of_elements);
+        int iter, element;
+        Init();
+        
+    for(iter = 0;iter < number_of_elements;iter++)
+        {
+                scanf("%d",&element);
+            s= Insert(element);
+            
+            heap_display(s);
+            printf("\n");
+            
+        }
+   // printf("enter the element to be deleted");
+    scanf("%d",&m);
+  r=heap_delete(m);
+    
+    printf("removed elemnt %d",r);
+   printf("\n");
+    heap_display(s);
+    
+    
+        printf("\n");
+        return 0;
+}
