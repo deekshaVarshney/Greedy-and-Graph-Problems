@@ -138,9 +138,9 @@ void addEdge(struct Graph* graph, int src, int dest)
     graph->array[src].head = newNode;
  
     // Since graph is undirected, add an edge from dest to src also
-    newNode = newAdjListNode(src);
+   /* newNode = newAdjListNode(src);
     newNode->next = graph->array[dest].head;
-    graph->array[dest].head = newNode;
+    graph->array[dest].head = newNode;*/
 }
  void DFS(struct Graph* graph)
      {
@@ -150,7 +150,7 @@ void addEdge(struct Graph* graph, int src, int dest)
      for(i=0;i<graph->V;i++)
          visited[i]=false;
      
-     int initial[graph->V];
+    int initial[graph->V];
         for(i=0;i<graph->V;i++)
          initial[i]=-1;
      int final[graph->V];
@@ -164,46 +164,56 @@ void addEdge(struct Graph* graph, int src, int dest)
        for(i=0;i<graph->V;i++)
            if(!visited[i])
            DFS_Visit(graph,i,visited,initial,final,parent,time);
+       
  }
       void  DFS_Visit(struct Graph* graph,int u,bool visited[],int initial[],int final[],int parent[],int time)
         {
-            visited[u]=true;
-          printf("%d",u); 
+          struct AdjListNode* pCrawl;
+          printf("%d",u);
+          visited[u]=true;
+           
           time =time+1;
             initial[u]=time;
             
-            struct AdjListNode* pCrawl = graph->array[u].head;
-		//		while(pCrawl){
-			//printf("-> %d", pCrawl->dest);
+           
+		for(pCrawl = graph->array[u].head;pCrawl!=NULL;pCrawl = pCrawl->next){
+          
+            printf("\n");
 		 if(!visited[(pCrawl->dest)])  {                      
                 parent[pCrawl->dest]=u;
                 DFS_Visit(graph,pCrawl->dest,visited,initial,final,parent,time);
-            // pCrawl=pCrawl->next;
+            
          }
-          
+        }
             time=time+1;
-            final[u]=time;
+            
+          final[u]=time;
         
       } 
 int main()
 {int V=7;
      struct Graph* graph = createGraph(V);
-    addEdge(graph,0, 1);
-    addEdge(graph,1, 2);
-   
-   addEdge(graph,0, 3);
- addEdge(graph,3, 4);
- addEdge(graph,1, 4);
- addEdge(graph,4, 2);
-  addEdge(graph,2, 6);
- addEdge(graph,3, 5);
+  
 
-    printf("Following is Breadth First Traversal (starting from vertex 0) \n");
+addEdge(graph,6, 2); 
+ addEdge(graph,5, 3);
+ addEdge(graph,4, 3);
+       addEdge(graph,4, 1);  
+ addEdge(graph,4, 2);
+ addEdge(graph,3, 5);
+  addEdge(graph,3, 4);
+   addEdge(graph,3, 0); 
+ addEdge(graph,2, 6); 
+ addEdge(graph,2, 4);
+  addEdge(graph,2, 1);
+  addEdge(graph,1, 4);  
+addEdge(graph,1, 2);
+  addEdge(graph,1, 0);
+        addEdge(graph,0, 3);   
+   addEdge(graph,0, 1);
+    //printf("Following is Breadth First Traversal (starting from vertex 0) \n");
     DFS(graph);
  
  
     return 0;
 }
-
-
-
