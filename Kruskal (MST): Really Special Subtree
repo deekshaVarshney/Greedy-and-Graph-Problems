@@ -1,0 +1,97 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+
+
+int id[10000];
+struct Edge
+{
+    int src,dest,weight;
+    
+};
+struct Graph
+    {
+    int V,E;
+    struct Edge* edge;
+};
+struct Graph* createGraph(int V, int E)
+{
+	struct Graph* graph = (struct Graph*) malloc( sizeof(struct Graph) );
+	graph->V = V;
+	graph->E = E;
+
+	graph->edge = (struct Edge*) malloc( graph->E * sizeof( struct Edge ) );
+
+	return graph;
+}
+//finding root of an element.
+void initialize(struct Graph* graph)
+    {
+    for(int i=0;i<graph->V;i++)
+        id[i]=i;
+}
+int root(int x)
+{
+    while(id[x] != x)
+    {
+        id[x] = id[id[x]];
+        x = id[x];
+    }
+    return x;
+}
+
+void union1(int x, int y)
+{
+    int p = root(x);
+    int q = root(y);
+    id[p] = id[q];
+}
+
+int myComp(const void* a, const void* b)
+{
+	struct Edge* a1 = (struct Edge*)a;
+	struct Edge* b1 = (struct Edge*)b;
+	return a1->weight > b1->weight;
+}
+int KruskalMST(struct Graph* graph)
+{
+	int V = graph->V;
+    int x,y,weight,minc=0;
+    	qsort(graph->edge, graph->E, sizeof(graph->edge[0]), myComp);
+    
+    for(int i=0;i<graph->E;i++)
+        {
+        x=graph->edge[i].src;
+        y=graph->edge[i].dest;
+        weight=graph->edge[i].weight;
+        // printf("%d  %d  %d ",x,y,weight);
+        if(root(x) != root(y))
+        {
+            minc += weight;
+            union1(x, y);
+           
+        }    
+       // printf("\n");
+    }
+    return minc;
+    
+}
+int main()
+    {
+    int m,n,i,j,x,y,r,k;
+    //m=vertices n=edges
+    scanf("%d %d",&m,&n);
+    struct Graph* graph = createGraph(m, n);
+    initialize(graph);
+    for(i=0;i<n;i++)
+        scanf("%d %d %d",&graph->edge[i].src,&graph->edge[i].dest,&graph->edge[i].weight);
+     // printf("%d  %d  %d ",graph->edge[i].src,graph->edge[i].dest,graph->edge[i].weight);
+    scanf("%d",&k);
+    int c=KruskalMST(graph);
+printf("%d",c);
+	return 0;
+    	
+}
+    
+    
