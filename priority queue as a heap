@@ -39,12 +39,14 @@ void max_heapify(int data[] , int loc, int count) {
 int Insert(int value)
 {
     int index,parent,p;
-    //level[-1]=0;
+    level[-1]=0;
     index=heapSize++;
-    p=((index-1)-1)/2;
+    int in=index;
+  //  printf("I%d",index);
+    p=((in-1))/2;
     //	printf("P%d V%d",p,value);	
-     //level[p]=level[p-1]+1;
-  //   printf("L%d",level[p]);
+     level[in]=level[p]+1;
+   //printf("L%d",level[in]);
   for(;index; index = parent)
 	{
 		parent = (index - 1) / 2;
@@ -56,7 +58,7 @@ int Insert(int value)
 
   }
 	heap[index] = value;
-    return (p+1);
+    return level[in];
 }
 
 void heap_display(int level) {
@@ -85,8 +87,8 @@ int heap_delete()
 {
 	int removed;
 	int temp = heap[--heapSize];
-    removed = heap[5];
-	heap[5] = temp;
+    removed = heap[0];
+	heap[0] = temp;
     //printf("Size%d",heapSize);
     heap[heapSize]=0;
 	max_heapify(heap, 0, heapSize);
@@ -109,8 +111,8 @@ int main()
             printf("\n");
             
         }
-        heap_delete();
-               heap_display(s);
+       heap_delete();
+             heap_display(s);
     
     
         printf("\n");
