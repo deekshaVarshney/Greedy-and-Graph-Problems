@@ -1,0 +1,86 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+#include <limits.h>
+int V=4;
+
+void printSolution(int dist[V][V], int n)
+{
+   printf("Vertex   Distance from Source\n");
+   for (int i = 0; i < V; i++)
+        for(int j=0;j<V;j++)
+      printf("%d \t\t %d\n", i, dist[i][j]);
+}
+
+
+
+
+void floyds(int cost[V][V],int src)
+    {
+    
+      int dist[V][V],P[V][V],j;
+     for(int i=0;i<V;i++){
+        for(j=0;j<V;j++){
+       // graph[u][v]=w;
+        printf("%d ",cost[i][j]);
+        }
+        printf("\n");
+        
+   }
+    for(int i=0;i<V;i++){
+     for(j=0;j<V;j++){
+        P[i][j]=0;
+    dist[i][j]=cost[i][j];
+    }
+    }
+    
+for(int k=0;k<V;k++)
+{ 
+    for(int i=0;i<V;i++)
+    {
+     for(j=0;j<V;j++)
+     {
+         if(dist[i][k]+dist[k][j]<dist[i][j])
+     {   P[i][j]=k;
+    dist[i][j]=dist[i][k]+dist[k][j];
+    }
+  }
+}
+}
+  printSolution(dist, V);   
+ 
+    
+}
+int main()
+    {
+    int u,v,i,j,V,T,E,w,src;
+   
+    scanf("%d %d", &V,&E);
+    int graph[V][V];
+         for(i=0;i<V;i++)
+        for(j=0;j<V;j++)
+    graph[i][j]=0;
+        
+    for(i=0;i<E;i++){
+        scanf("%d %d %d",&u,&v,&w);
+        graph[v-1][u-1]=w;
+             graph[u-1][v-1]=w;
+    //printf("%d %d %d",u,v,w);
+    
+    }
+   // scanf("%d",&w);
+   for(i=0;i<V;i++){
+        for(j=0;j<V;j++){
+       // graph[u][v]=w;
+      printf("%d ",graph[i][j]);
+        }
+        printf("\n");
+        
+   }
+    
+        scanf("%d",&src);
+        
+        floyds(graph,src-1);
+    
+}
