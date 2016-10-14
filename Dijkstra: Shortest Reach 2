@@ -3,7 +3,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <limits.h>
-int V=4;
+int V;
 int minimum(int dist[],int s[])
     {
     int min=INT_MAX,minIndex;
@@ -18,9 +18,9 @@ int minimum(int dist[],int s[])
 }
 void printSolution(int dist[], int n)
 {
-   printf("Vertex   Distance from Source\n");
-   for (int i = 0; i < V; i++)
-      printf("%d \t\t %d\n", i, dist[i]);
+  // printf("Vertex   Distance from Source\n");
+   for (int i = 1; i < V; i++)
+      printf("%d ", dist[i]);
 }
 
 
@@ -29,13 +29,7 @@ void printSolution(int dist[], int n)
 void dijkestra(int cost[V][V],int src)
     {
     int i,j;
-     for(i=0;i<V;i++){
-        for(j=0;j<V;j++){
-       // graph[u][v]=w;
-        printf("%d ",cost[i][j]);
-        }
-         printf("\n");
-     }
+     
       int dist[V],s[V];
     
     for(int i=0;i<V;i++){
@@ -56,7 +50,7 @@ for(int k=0;k<V-1;k++)
           if(cost[u][v]&&s[v]==0&&(dist[u]+cost[u][v])<dist[v]&&dist[u]!=INT_MAX)
             dist[v]=dist[u]+cost[u][v];
     }
-    printf("\n");
+ //   printf("\n");
   
 }
   printSolution(dist, V);   
@@ -65,10 +59,11 @@ for(int k=0;k<V-1;k++)
 }
 int main()
     {
-    int u,v,i,j,V,T,E,graph[50][50],w,src;
+    int u,v,i,j,T,E,w,src;
    scanf("%d",&T);
     while(T--){
     scanf("%d %d", &V,&E);
+        int graph[V][V];
          for(i=0;i<V;i++)
         for(j=0;j<V;j++)
     graph[i][j]=0;
@@ -81,14 +76,7 @@ int main()
     
     }
    // scanf("%d",&w);
-   for(i=0;i<V;i++){
-        for(j=0;j<V;j++){
-       // graph[u][v]=w;
-        printf("%d ",graph[i][j]);
-        }
-        printf("\n");
-        
-   }
+  
     
         scanf("%d",&src);
         
