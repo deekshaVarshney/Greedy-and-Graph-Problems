@@ -3,7 +3,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <limits.h>
-int V=4;
+int V;
 #define INF 99999
 
 void printSolution(int dist[V][V], int n)
