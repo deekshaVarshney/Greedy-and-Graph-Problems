@@ -1,0 +1,182 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#define NIL 0
+#define INF INT_MAX
+ 
+struct QNode* newNode(int );
+struct Queue *createQueue();
+void enQueue(struct Queue* , int );
+struct QNode *deQueue(struct Queue *);
+struct AdjListNode* newAdjListNode(int );
+struct Graph* createGraph(int );
+void addEdge(struct Graph* , int , int );
+void BFS(struct Graph* ,int  );
+struct QNode
+{
+    int key;
+    struct QNode *next;
+};
+struct Queue
+{
+    struct QNode *front, *rear;
+};
+struct QNode* newNode(int k)
+{
+    struct QNode *temp = (struct QNode*)malloc(sizeof(struct QNode));
+    temp->key = k;
+    temp->next = NULL;
+    return temp; 
+}
+struct Queue *createQueue()
+{
+    struct Queue *q = (struct Queue*)malloc(sizeof(struct Queue));
+    q->front = q->rear = NULL;
+    return q;
+}
+void enQueue(struct Queue *q, int k)
+{
+    struct QNode *temp = newNode(k);
+    if (q->rear == NULL)
+    {
+       q->front = q->rear = temp;
+       return;
+    }
+    q->rear->next = temp;
+    q->rear = temp;
+}
+struct QNode *deQueue(struct Queue *q)
+{
+    if (q->front == NULL)
+       return NULL;
+    struct QNode *temp = q->front;
+    q->front = q->front->next;
+    if (q->front == NULL)
+       q->rear = NULL;
+    return temp;
+}
+struct AdjListNode
+{
+    int dest;
+    struct AdjListNode* next;
+};
+struct AdjList
+{
+    struct AdjListNode *head;  // pointer to head node of list
+};
+struct Graph
+{
+    int V;
+    struct AdjList* array;
+};
+struct BipGraph
+{
+    int m,n;
+    struct AdjList* array;
+};
+struct AdjListNode* newAdjListNode(int dest)
+{
+    struct AdjListNode* newNode =
+            (struct AdjListNode*) malloc(sizeof(struct AdjListNode));
+    newNode->dest = dest;
+    newNode->next = NULL;
+    return newNode;
+}
+struct Graph* createGraph(int V)
+{
+    struct Graph* graph = (struct Graph*) malloc(sizeof(struct Graph));
+    graph->V = V;
+    graph->array = (struct AdjList*) malloc(V * sizeof(struct AdjList));
+    int i;
+    for (i = 0; i < V; ++i)
+        graph->array[i].head = NULL;
+    return graph;
+}
+void addEdge(struct Graph* graph, int src, int dest)
+{   struct AdjListNode* newNode = newAdjListNode(dest);
+    newNode->next = graph->array[src].head;
+    graph->array[src].head = newNode;
+ }
+struct BipGraph* createGraph(int V)
+{
+    struct BipGraph* bipgraph = (struct BipGraph*) malloc(sizeof(struct BipGraph));
+    bipgraph->m = m;
+    bipgraph->array = (struct AdjList*) malloc(V * sizeof(struct AdjList));
+    int i;
+    for (i = 0; i < V; ++i)
+        bipgraph->array[i].head = NULL;
+    return bipgraph;
+}
+void addEdge(struct BipGraph* bipgraph, int src, int dest)
+{   struct AdjListNode* newNode = newAdjListNode(dest);
+    newNode->next = bipgraph->array[src].head;
+    bipgraph->array[src].head = newNode;
+ }
+ void BFS(struct Graph* graph,int pU,int pV,int dist)
+     { int i;
+     struct AdjListNode* j;
+     struct AdjListNode* pCrawl;
+     
+      struct Queue *q = createQueue();
+     enQueue(q,s);
+     visited[s]=true;
+     distance[s]=0;
+       for (int u=1; u<=m; u++)
+           {
+            if (pU[u]==NIL)
+                {
+                dist[u] = 0;
+            Q.push(u);
+            }
+            else dist[u] = INF;
+       }
+      dist[NIL] = INF;
+      
+       while(q->front!=NULL)
+       {         struct QNode *n=deQueue(q);
+          int v=n->key;
+       printf("D%d ",n->key);
+         if (dist[u] < dist[NIL])
+		for(pCrawl = graph->array[v].head;pCrawl!=NULL;pCrawl = pCrawl->next)
+		{		
+           int v=pCrawl->dest;
+             if (dist[pairV[v]] == INF)
+            {  
+                 dist[pairV[v]] = dist[u] + 1;                 
+                enQueue(q,pV[v]);
+            }
+	          }
+            }
+     	    return (dist[NIL] != INF);
+}
+int hopcroft(struct BipGraph* bipgraph,int *pU,int *pV,int *dist)
+    {
+    int pU[m+1],pV[n+1],dist[m+1];
+    for (int u=0; u<m; u++)
+        pU[u] = NIL;
+    for (int v=0; v<n; v++)
+        pV[v] = NIL;
+     int result = 0;
+    while (bfs())
+    {
+        // Find a free vertex
+        for (int u=1; u<=m; u++)
+ 
+            // If current vertex is free and there is
+            // an augmenting path from current vertex
+            if (pU[u]==NIL && dfs(u))
+                result++;
+    }
+    return result;
+    
+}
+int main()
+    {
+    int *pU,*pV,*dist,m, n;
+    scanf("%d %d ",&m,&n);
+    for(i=0;i<m;i++)
+        scanf("%d %d " &u,&v);
+        addEdge(u,v);
+    
+    hopcroft(pU,pV,dist);
+}
