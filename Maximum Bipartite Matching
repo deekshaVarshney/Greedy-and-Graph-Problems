@@ -92,18 +92,15 @@ void addEdge(struct BipGraph* bipgraph, int src, int dest)
   newNode = newAdjListNode(src);
     newNode->next = bipgraph->array[dest].head;
 bipgraph->array[dest].head = newNode;
- 
- 
  }
- int BFS(struct BipGraph* bipgraph,int pU[],int pV[],int dist[])
-     { int i;
+
+ bool BFS(struct BipGraph* bipgraph,int pU[],int pV[],int dist[])
+     {
+     int i;
      struct AdjListNode* j;
      struct AdjListNode* pCrawl;
-     
       struct Queue *q = createQueue();
-     
-   
-       for (int u=1; u<=bipgraph->m; u++)
+            for (int u=1; u<=bipgraph->m; u++)
            {
             if (pU[u]==NIL)
                 {
@@ -130,9 +127,10 @@ bipgraph->array[dest].head = newNode;
             }
 	          }
             }
-      if(dist[NIL] != INF)
-     	    return (0);
+    return (dist[NIL] != INF);
+     	    
 }
+
 int hopcroft(struct BipGraph* bipgraph)
     {
     int pU[bipgraph->m+1],pV[bipgraph->n+1],dist[bipgraph->m+1];
@@ -141,7 +139,7 @@ int hopcroft(struct BipGraph* bipgraph)
     for (int v=0; v<bipgraph->n; v++)
         pV[v] = NIL;
      int result = 0;
-    while (bfs(bipgraph,pU,pV,dist)!=0)
+    while (BFS(bipgraph,pU,pV,dist))
     {
         // Find a free vertex
         for (int u=1; u<=bipgraph->m; u++)
@@ -158,10 +156,13 @@ int main()
     {
    int m, n,i,u,v;
      struct BipGraph* bipgraph = createBipGraph(m,n);
-    scanf("%d %d ",&m,&n);
-    for(i=0;i<m;i++)
-        scanf("%d %d " ,&u,&v);
-        addEdge(bipgraph,u,v);
-    
+    //scanf("%d %d ",&m,&n);
+    //for(i=0;i<m;i++)
+       // scanf("%d %d " ,&u,&v);
+       // addEdge(bipgraph,u,v);
+    addEdge(bipgraph,0,1 );
+		
+	  
    int k= hopcroft(bipgraph);
+    return 0;
 }
