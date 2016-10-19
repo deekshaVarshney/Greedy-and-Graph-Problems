@@ -111,6 +111,7 @@ bipgraph->array[dest].head = newNode;
        }
       dist[NIL] = INF;
       
+     
        while(q->front!=NULL)
        {       
            struct QNode *l=deQueue(q);
@@ -130,6 +131,38 @@ bipgraph->array[dest].head = newNode;
     return (dist[NIL] != INF);
      	    
 }
+bool dfs(struct BipGraph* bipgraph,int u,int pU[],int pV[],int dist[])
+{
+     struct AdjListNode* j;
+     struct AdjListNode* pCrawl;
+    if (u != NIL)
+    {
+     ;
+        for(pCrawl = bipgraph->array[u].head;pCrawl!=NULL;pCrawl = pCrawl->next)
+        {
+            // Adjacent to u
+           int v=pCrawl->dest;
+ 
+            // Follow the distances set by BFS
+            if (dist[pV[v]] == dist[u]+1)
+            {
+                // If dfs for pair of v also returns
+                // true
+                if (dfs(bipgraph,pV[v],pU,pV,dist) == true)
+                {
+                    pV[v] = u;
+                    pU[u] = v;
+                    return true;
+                }
+            }
+        }
+ 
+        // If there is no augmenting path beginning with u.
+        dist[u] = INF;
+        return false;
+    }
+    return true;
+}
 
 int hopcroft(struct BipGraph* bipgraph)
     {
@@ -146,7 +179,7 @@ int hopcroft(struct BipGraph* bipgraph)
  
             // If current vertex is free and there is
             // an augmenting path from current vertex
-            if (pU[u]==NIL )
+            if (pU[u]==NIL&& dfs(bipgraph,u,pU,pV,dist) )
                 result++;
     }
     return result;
@@ -155,14 +188,19 @@ int hopcroft(struct BipGraph* bipgraph)
 int main()
     {
    int m, n,i,u,v;
+    m=4;
+    n=4;
      struct BipGraph* bipgraph = createBipGraph(m,n);
     //scanf("%d %d ",&m,&n);
     //for(i=0;i<m;i++)
        // scanf("%d %d " ,&u,&v);
        // addEdge(bipgraph,u,v);
-    addEdge(bipgraph,0,1 );
-		
+   
+    addEdge(bipgraph,1,2 );
+		  addEdge(bipgraph,2,1 );
+      addEdge(bipgraph,4,4 );
 	  
-   int k= hopcroft(bipgraph);
+int k= hopcroft(bipgraph);
+    printf("size of maximum bipartite matching is %d",k);
     return 0;
 }
