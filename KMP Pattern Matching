@@ -5,21 +5,21 @@
 char prefix(char *P,int *pi)
 {
 int m=strlen(P);
-pi[1]=0;
+pi[0]=0;
 int k=0;
-for(int q=2;q<=m;q++)
+for(int q=1;q<m;q++)
 {
-while(k>0&&P[k+1]!=P[q])
+while(k>0&&P[k]!=P[q])
 k=pi[k];
-if(P[k+1]==P[q])
+if(P[k]==P[q])
 k=k+1;
 
 pi[q]=k;
 
 }
-for(int i=1;i<=m;i++)
-printf("%d",pi[i]);
-return *pi;
+/*for(int i=0;i<m;i++)
+printf("%d",pi[i]);*/
+return *pi; //prefix array
 }
 
 void KMP(char *T,char *P)
@@ -27,41 +27,45 @@ void KMP(char *T,char *P)
 int n=strlen(T);
 int m=strlen(P);
 int *pi=(int*)malloc(sizeof(int)*m);
-for(int j=1;j<=m;j++)
-pi[j]=prefix(P,pi);
+
+prefix(P,pi);
 
 int q=0;
-for(int i=1;i<=n;i++)
+for(int i=0;i<n;i++)
 {
-while(q>0&&P[q+1]!=T[i])
+while(q>0&&P[q]!=T[i])
 q=pi[q];
 
-if(P[q+1]==T[i])
+if(P[q]==T[i])
 q=q+1;
 
 
-if(q==m)
+if(q==(m))
 {
-printf("Pattern occurs with shift %d",i-m);
+printf("Pattern occurs with shift %d \n",(i-m)+1);
 q=pi[q];
 }
 }
-}     
-
+free(pi);
+} 
 
 int main()
     {
 int m,n;
-   // char *P,*T;
-   // scanf("%d %d",&m,&n);
+  
+   scanf("%d %d",&n,&m);
+ char P[m],T[n];
 
-/*for(int i=0;i<m;i++)
-scanf("%s",&P);
 
-for(int j=0;j<n;j++)
-scanf("%s",&*T[j]);*/
- char *T = "ABABDABACDABABCABAB";
-   char *P = "ABABCABAB";
+scanf("%s",T);
+
+scanf("%s",P);
+
+
+
+
+ /*char *T = "ABABDABACDABABCABAB";
+   char *P = "ABABCABAB";*/
 KMP(T,P); 
 
 return 0;
