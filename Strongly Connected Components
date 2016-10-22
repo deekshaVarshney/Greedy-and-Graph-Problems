@@ -203,8 +203,10 @@ struct Graph* transpose(struct Graph* graph)
  for (int v = 0; v < graph->V; v++){
 for(pCrawl = graph->array[v].head;pCrawl!=NULL;pCrawl = pCrawl->next)
 {
-printf("%d->%d ",pCrawl->dest,v);
-addEdge(graph,pCrawl->dest,v);
+//printf("%d->%d ",pCrawl->dest,v);
+ struct AdjListNode* newNode = newAdjListNode(pCrawl->dest);
+    newNode->next = graph->array[v].head;
+    graph->array[v].head = newNode;
 
 }
 printf("\n");
@@ -216,7 +218,7 @@ void  DFSUtil(struct Graph* graph,int u,bool visited[])
           struct AdjListNode* pCrawl;
        
           visited[u]=true;
-         // printf("%d",u);
+          printf("%d",u);
          // time =time+1;
            // initial[u]=time;
             
@@ -283,7 +285,7 @@ void printSCCs(struct Graph* graph)
         // Print Strongly connected component of the popped vertex
         if (visited[v] == false)
         {
-           printf("%d",v);
+           
             DFSUtil(graphh,v, visited);
  
             printf("\n");
