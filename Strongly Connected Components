@@ -218,7 +218,7 @@ void  DFSUtil(struct Graph* graph,int u,bool visited[])
           struct AdjListNode* pCrawl;
        
           visited[u]=true;
-          printf("%d",u);
+         // printf("%d",u);
          // time =time+1;
            // initial[u]=time;
             
@@ -252,7 +252,7 @@ void fillOrder(struct Graph* graph,int v, bool visited[])
  
     // All vertices reachable from v are processed by now, push v 
     push(v);
-
+ 
 }   
 
 void printSCCs(struct Graph* graph)
@@ -272,7 +272,7 @@ void printSCCs(struct Graph* graph)
    struct Graph* graphh = transpose(graph);
  
     // Mark all the vertices as not visited (For second DFS)
-    for(int i = 0; i < graph->V; i++)
+    for(int i = 0; i < graphh->V; i++)
         visited[i] = false;
  
     // Now process all vertices in order defined by Stack
@@ -281,7 +281,7 @@ void printSCCs(struct Graph* graph)
         // Pop a vertex from stack
         int v = topelement();
         pop();
- //printf("%d",v);
+
         // Print Strongly connected component of the popped vertex
         if (visited[v] == false)
         {
@@ -298,20 +298,18 @@ int main()
 {int V=8;
      struct Graph* graph = createGraph(V);
   
-
-addEdge(graph,7, 2); 
- addEdge(graph,5, 7);
- addEdge(graph,5, 6);
-       addEdge(graph,5, 2);  
- addEdge(graph,4, 6);
- addEdge(graph,4, 5);
-  addEdge(graph,3, 7);
-   addEdge(graph,2, 3); 
- addEdge(graph,1, 5); 
- addEdge(graph,1, 2);
-  addEdge(graph,0, 4);
   addEdge(graph,0, 1);  
-
+ addEdge(graph,0, 4);
+addEdge(graph,1, 2);
+ addEdge(graph,1, 5); 
+addEdge(graph,2, 3); 
+ addEdge(graph,3, 7);
+ addEdge(graph,4, 5);
+addEdge(graph,4, 6);
+  addEdge(graph,5, 2); 
+ addEdge(graph,5, 6);
+addEdge(graph,5, 7);
+addEdge(graph,7, 2); 
     //printf("Following is Breadth First Traversal (starting from vertex 0) \n");
   printSCCs(graph);
  
