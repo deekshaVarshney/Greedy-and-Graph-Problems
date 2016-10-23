@@ -1,0 +1,102 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+int min(int x, int y)
+{
+  return (x < y) ? x : y
+}
+int max(int x, int y)
+{
+  return (x > y) ? x : y
+}
+
+char good_suffix(char *P,int m,int *G)
+{
+int V[m]=m+1;
+for(int L=1;L<m;L++)
+{
+G[L]=2*m-L;
+}
+j=m;
+k=m+1;
+while(j>=1){
+V[j]=k;
+while(k<=m&&P[j]!=P[k])
+G[k]=min(G[k],m-j);
+k=V[k];
+}
+j=j-1;
+k=k-1;
+}
+for(int L=1;L<m;L++)
+{
+G[L]=min(G[k],m+k-L);
+}
+j=V[k]
+while(k<m){
+while(k<=j){
+G[L]=min(G[k],j-k+m);
+k=k+1;
+}
+j=V[j];
+
+}
+/*for(int i=0;i<m;i++)
+printf("%d",pi[i]);*/
+
+}
+void character_list_occurence(P,m,alpha,k,beta)
+{
+for(int i=0;i<k;i++)
+B[alpha[i]]=0;
+for(int i=0;i<m;i++)
+B[P[l]]=l;
+}
+void BM(char *T,char *P)
+{
+int n=strlen(T);
+int m=strlen(P);
+good_suffix(P,m,G);
+character_list_occurence(P,m,alpha,k,beta);
+i=1;
+j=m;
+while(i<n-m+1){
+k=i+j;
+j=m;
+while(j>0&&P[j]!=T[k-1])
+j=j-1;
+k=k-1;
+}
+if(j>0)
+return 
+else
+i=i+max(G[j],j-B(T[k-1]]);
+
+}
+}
+
+int main()
+    {
+int m,n;
+  
+   scanf("%d %d",&n,&m);
+ char P[m],T[n];
+
+
+scanf("%s",T);
+
+scanf("%s",P);
+
+
+
+
+ /*char *T = "ABABDABACDABABCABAB";
+   char *P = "ABABCABAB";*/
+BM(T,P); 
+
+return 0;
+    	
+}
+    
+    
