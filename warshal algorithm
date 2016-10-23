@@ -1,0 +1,113 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+#include <limits.h>
+int V;
+#define INF 99999
+
+void printSolution(int dist[V][V], int n)
+{
+    int u,v,src,i;
+     scanf("%d",&src);
+        for(i=0;i<src;i++){
+            scanf("%d %d",&u,&v);
+
+         if(dist[u-1][v-1]==INF)
+                       printf("-1");
+                   else
+      printf("%d", dist[u-1][v-1]);
+            printf("\n");
+}
+        }
+  
+
+
+
+
+void warshalls(int cost[V][V])
+    {
+    
+      int PL[V][V],P[V][V],PP[V][V],j;
+     /*for(int i=0;i<V;i++){
+        for(j=0;j<V;j++){
+       // graph[u][v]=w;
+        printf("%d ",cost[i][j]);
+        }
+        printf("\n");
+        
+   }*/
+    for(int i=0;i<V;i++){
+     for(j=0;j<V;j++){
+        P[i][j]=cost[i][j];
+    PL[i][j]=cost[i][j];
+    }
+    }
+    
+for(int p=0;p<V;p++)
+{ 
+    for(int i=0;i<V;i++)
+    {
+     for(j=0;j<V;j++)
+     {
+        PP[i][j]=0;
+	for(int k=0;k<V;k++)
+     {   
+PP[i][j]=PP[i][j]to P[i][k]*cost[k][j];
+   
+    }
+  }
+}
+ for(int i=0;i<V;i++){
+     for(j=0;j<V;j++){
+        P[i][j]=PP[i][j];
+    P[i][j]=PL[i][j]+P[i][j];
+    }
+    }
+}
+  printSolution(PL, V);   
+ 
+    
+}
+int main()
+    {
+    int u,v,i,j,V,T,E,w,src;
+   
+    scanf("%d %d", &V,&E);
+    int graph[V][V];
+         for(i=0;i<V;i++){
+        for(j=0;j<V;j++){
+       // graph[u][v]=w;
+        if (i==j)
+              graph[i][j]=0;
+        else
+            graph[i][j]=INF;
+        }
+       
+        
+   }
+        
+    for(i=0;i<E;i++){
+        scanf("%d %d %d",&u,&v,&w);
+       graph[v-1][u-1]=INF;
+             graph[u-1][v-1]=w;
+    //printf("%d %d %d",u,v,w);
+    
+    }
+   // scanf("%d",&w);
+  /* for(i=0;i<V;i++){
+        for(j=0;j<V;j++){
+       // graph[u][v]=w;
+        if (graph[i][j] == INF)
+                printf("%7s", "INF");
+            else
+                printf ("%7d", graph[i][j]);
+        }
+        printf("\n");
+        
+   }*/
+    
+      
+        warshalls(graph);
+    
+}
