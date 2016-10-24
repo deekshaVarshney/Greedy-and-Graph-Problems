@@ -53,7 +53,7 @@ for(int p=0;p<V;p++)
         PP[i][j]=0;
 	for(int k=0;k<V;k++)
      {   
-PP[i][j]=PP[i][j]to P[i][k]*cost[k][j];
+PP[i][j]=PP[i][j]+P[i][k]*cost[k][j];
    
     }
   }
