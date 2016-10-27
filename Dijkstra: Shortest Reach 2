@@ -70,7 +70,14 @@ int main()
         
     for(i=0;i<E;i++){
         scanf("%d %d %d",&u,&v,&w);
-        graph[v-1][u-1]=w;
+        if(graph[v-1][u-1]==-1)
+                graph[v-1][u-1]=w;
+             if(graph[u-1][v-1]==-1)
+                graph[u-1][v-1]=w;
+             
+      if( graph[v-1][u-1]>w&&graph[v-1][u-1]!=-1)
+           graph[v-1][u-1]=w;
+      if( graph[u-1][v-1]>w&&graph[u-1][v-1]!=-1)
              graph[u-1][v-1]=w;
     //printf("%d %d %d",u,v,w);
     
