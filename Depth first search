@@ -1,19 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-// A C program to demonstrate linked list based implementation of queue
- 
-// A linked list (LL) node to store a queue entry
-struct QNode* newNode(int );
-struct Queue *createQueue();
-
-void enQueue(struct Queue* , int );
-struct QNode *deQueue(struct Queue *);
-struct AdjListNode* newAdjListNode(int );
-struct Graph* createGraph(int );
-void addEdge(struct Graph* , int , int );
- void DFS(struct Graph* );
- void  DFS_Visit(struct Graph* graph,int u,bool visited[],int initial[],int final[],int parent[],int time);
 
 struct QNode
 {
