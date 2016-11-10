@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
+int main(){
+
+int i,j,n;//here "n" is number of enteries
+printf("\nEnter size of array = ");
+scanf("%d",&n);
+char *name[n];
+for(i=0;i<n;i++)
+name[i]=(char*)malloc(sizeof(char)*n);
+
+for(i=0;i<n;i++)
+{
+    for(j=0;j<1;j++)
+    {
+        printf("\nEnter name = ");
+        scanf("%s",name[i]);
+    }
+}
+//printing the data
+for(i=0;i<n;i++)
+{
+    for(j=0;j<1;j++)
+    {
+        printf("%s",name[i]);
+    }
+    printf("\n");
+}
+return 0;
+}
