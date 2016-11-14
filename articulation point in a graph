@@ -174,7 +174,7 @@ void addEdge(struct Graph* graph, int src, int dest)
            DFS_Visit(graph,i,visited,initial,final,parent,time,low,ap);
        	for (int i = 0; i < graph->V; i++)
 		if (ap[i] == true)
-		printf("(%d )",i);
+		printf("(%d )",i);   //articulation points
  }
       void  DFS_Visit(struct Graph* graph,int u,bool visited[],int initial[],int final[],int parent[],int time,int low[],bool ap[])
         {
