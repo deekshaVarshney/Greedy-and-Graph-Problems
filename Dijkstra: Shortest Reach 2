@@ -8,7 +8,8 @@ int min(int x,int y)
     {
     return (x<y?x:y);
 }
-int minimum(int dist[],int s[])
+//Pick the vertex with minimum distance value and not already included in SPT (not in sptSET). The vertex 1 is picked and added to sptSet.
+int minimum(int dist[],int s[])   
     {
     int min=INT_MAX,minIndex;
     for(int v=0;v<V;v++)
@@ -35,8 +36,6 @@ else if(dist[i]>=INT_MAX)
         printf("%d ", dist[i]);
        
 }
-
-
 
 
 
